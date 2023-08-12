@@ -49,7 +49,7 @@ const app = Vue.createApp({
       currentPage.value = pageNumber;
     };
     const createTopic = () => {
-      topics.value.push({name: newTopic.value});
+      topics.value.push({name: newTopic.value, comments: [] , guid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)});
       newTopic.value = '';
       saveTopics();
     };
