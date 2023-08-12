@@ -8,31 +8,47 @@
   <!-- we'll use axious to connect to API -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- <script src="https://unpkg.com/vue-axios@next"></script> -->
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<style>
-  #app {
-    margin: 0 auto;
-    width: 50%;
-    text-align: center;
-  }
-  .item {
-    margin: 2px 0;
-  }
-</style>
+
 <body>
   <div id="app">
-    <div id="app" class="">
-      <h1>
-        <a href="https://jovylle.github.io/vue-test/">Jovylle Vue Test</a>
+    <div id="app" class="container">
+      <h1 class="title">
+        <a href="https://jovyllebermudez.github.io/simple-crud/">Jovylle Vue3 Test Crud</a>
       </h1>
       <input type="text" v-model="newTopic" placeholder="New Topic">
       <button @click="createTopic">Add</button>
       <button @click="resetTopics">Reset Topics From API</button>
-    
-      <div v-for="(topic, index) in topics" :key="index" class="item">
-        <input type="text" v-model="topic.name">
-        <button @click="updateTopic(index, topic.name)">Update</button>
-        <button @click="deleteTopic(index)">Delete</button>
+      <div v-if="viewingCommentsForTopic" class="comments">
+        <p>topic:</p>
+        <p>{{ viewingCommentsForTopic.name }}</p>
+        <p>comments:</p>
+        <div v-for="(comment, index) in viewingCommentsForTopic.comments" :key="index" class="comment">
+          {{ comment.comment }} - date:{{comment.date}} - by:{{comment.by}}
+          <button @click="editComment(comment, index)">Edit</button>
+        </div>
+        <div v-if="editingComment" class="editComment">
+          <input v-model="editingComment.comment.comment" type="text" placeholder="Edit comment..." />
+          <button @click="updateComment">Update</button>
+          <button @click="editingComment = null">Cancel</button>
+        </div>
+        <input v-model="newComment" type="text" placeholder="Add comment...">
+        <button @click="addComment">Add Comment</button>
+        <button @click="viewingCommentsForTopic = null">Close</button>
+      </div>
+      <div class="items">
+        <div v-for="(topic, index) in slicedTopics" :key="index" class="item">
+          <input type="text" class="itemInput" v-model="topic.name">
+          <div class="buttonss">
+            <button @click="openComments(topic)">View Comments</button>
+            <button @click="updateTopic(index, topic.name)">Update</button>
+            <button @click="deleteTopic(index)">Delete</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button v-for="n in totalPages" @click="setPage(n-1)">{{n}}</button>
       </div>
     </div>
   </div>

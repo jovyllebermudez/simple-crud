@@ -1,9 +1,53 @@
-const { ref, onMounted } = Vue;
+const { ref, onMounted, computed, $set } = Vue;
 const app = Vue.createApp({
   setup () {
     const topics = ref([]);
     const newTopic = ref('');
+    const perPage = ref(20);
+    const currentPage = ref(0);
+    const viewingCommentsForTopic = ref(null); // holds comments
+    const newComment = ref(''); //  For storing the new comment
+    const editingComment = ref(null); //  storing the comment currently being edited
 
+    const addComment = () => {
+      viewingCommentsForTopic.value.comments.push({
+        comment: newComment.value, date: new Date().toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true,
+        }), by: 'Me'});
+      newComment.value = '';
+      saveTopics();
+    };
+
+    const editComment = (comment, index) => {
+      editingComment.value = { comment, index };
+    };
+
+    const updateComment = () => {
+      viewingCommentsForTopic.value.comments[editingComment.value.index].comment = editingComment.value.comment.comment;
+      // this.$set(viewingCommentsForTopic.value.comments, editingComment.value.index, editingComment.value.comment);
+      // debugger;
+      editingComment.value = null;
+      saveTopics();
+    }; 
+    const openComments = (topic) => {
+      // debugger;
+      viewingCommentsForTopic.value = topic;
+    };
+
+    const slicedTopics = computed(() => {
+      let start = currentPage.value * perPage.value,
+        end = start + perPage.value;
+      return topics.value.slice(start, end);
+    });
+    const totalPages = computed(() => {
+      return Math.ceil(topics.value.length / perPage.value);
+    });
+    const setPage = (pageNumber) => {
+      currentPage.value = pageNumber;
+    };
     const createTopic = () => {
       topics.value.push({name: newTopic.value});
       newTopic.value = '';
@@ -46,7 +90,7 @@ const app = Vue.createApp({
       }
     });
 
-    return { topics, newTopic, createTopic, updateTopic, deleteTopic, resetTopics };
+    return { topics, newTopic, createTopic, updateTopic, deleteTopic, resetTopics, slicedTopics, perPage, currentPage, setPage, totalPages, openComments, viewingCommentsForTopic, addComment, newComment, editComment, updateComment, editingComment };
   }
 });
 

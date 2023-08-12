@@ -1,0 +1,92 @@
+input,
+button,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+a {
+  color: #000;
+}
+input,
+button {
+  outline: none;
+  border: 1px solid #d4d4d4;
+  margin: 1px 2px;
+  padding: 2px 3px;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* #app {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+} */
+
+.item {
+  margin: 5px 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2px auto;
+  padding: 2px 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  max-width: 800px;
+}
+.items {
+  margin: 10px 0;
+}
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.itemInput {
+  width: 500px;
+  max-width: 80vw;
+}
+.buttonss {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.comments{
+  padding: 10px;
+  margin: 10px;
+  border-top: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+}
+.addComment{
+  padding: 10px;
+  margin: 10px;
+  border-top: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+}
+.comment{
+  margin: 5px 0;
+}
+.editComment{
+  margin: 5px 0;
+}
