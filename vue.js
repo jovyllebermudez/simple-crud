@@ -49,18 +49,20 @@ const app = Vue.createApp({
       currentPage.value = pageNumber;
     };
     const createTopic = () => {
-      topics.value.push({name: newTopic.value});
+      topics.value.push({name: newTopic.value, comments: [] , guid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)});
       newTopic.value = '';
       saveTopics();
     };
 
     const updateTopic = (index, updatedTopic) => {
-      topics.value[index].name = updatedTopic;
+
+      
+      topics.value[currentPage.value * perPage.value+index].name = updatedTopic;
       saveTopics();
     };
 
     const deleteTopic = (index) => {
-      topics.value.splice(index, 1); // will test again
+      topics.value.splice(currentPage.value * perPage.value + index, 1); 
       saveTopics();
     };
 
