@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Jovylle Vue Test</title>
+  <!-- Okay now will treat Vvue js as A library -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <!-- we'll use axious to connect to API -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- <script src="https://unpkg.com/vue-axios@next"></script> -->
+</head>
+<style>
+  #app {
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+  }
+  .item {
+    margin: 2px 0;
+  }
+</style>
+<body>
+  <div id="app">
+    <div id="app" class="">
+      <h1>
+        <a href="https://jovylle.github.io/vue-test/">Jovylle Vue Test</a>
+      </h1>
+      <input type="text" v-model="newTopic" placeholder="New Topic">
+      <button @click="createTopic">Add</button>
+      <button @click="resetTopics">Reset Topics From API</button>
+    
+      <div v-for="(topic, index) in topics" :key="index" class="item">
+        <input type="text" v-model="topic.name">
+        <button @click="updateTopic(index, topic.name)">Update</button>
+        <button @click="deleteTopic(index)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <script src="vue.js"></script>
+</body>
+
+</html>
