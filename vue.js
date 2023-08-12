@@ -55,12 +55,14 @@ const app = Vue.createApp({
     };
 
     const updateTopic = (index, updatedTopic) => {
-      topics.value[index].name = updatedTopic;
+
+      
+      topics.value[currentPage.value * perPage.value+index].name = updatedTopic;
       saveTopics();
     };
 
     const deleteTopic = (index) => {
-      topics.value.splice(index, 1); // will test again
+      topics.value.splice(currentPage.value * perPage.value + index, 1); 
       saveTopics();
     };
 
