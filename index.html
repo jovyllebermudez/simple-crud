@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Jovylle Vue Test</title>
+  <title>Simple Vue3 Crud</title>
   <!-- Okay now will treat Vvue js as A library -->
   <script src="https://unpkg.com/vue@next"></script>
   <!-- we'll use axious to connect to API -->
@@ -17,9 +17,18 @@
       <h1 class="title">
         <a href="https://jovyllebermudez.github.io/simple-crud/">Jovylle Vue3 Test Crud</a>
       </h1>
-      <input type="text" v-model="newTopic" placeholder="New Topic">
-      <button @click="createTopic">Add</button>
+      <div style="margin: 20px;">
+        <h2>Github Link:</h2>
+        <a href="https://github.com/jovyllebermudez/vue3-simple-crud-html">https://github.com/jovyllebermudez/vue3-simple-crud-html</a>
+      </div>
+      <p>
+        <input type="text" v-model="newTopic" placeholder="New Topic">
+        <button @click="createTopic">Add</button>
+        <span>Will be added at the end.</span>
+      </p>
+      <br>
       <button @click="resetTopics">Reset Topics From API</button>
+      <br>
       <div v-if="viewingCommentsForTopic" class="comments">
         <p>topic:</p>
         <p>{{ viewingCommentsForTopic.name }}</p>
